@@ -3,8 +3,16 @@ import java.util.Random;
 public class Rsp{    
     public static void main(String[]args){
         Scanner s = new Scanner(System.in);
-        System.out.print("1/2/3 중에서 숫자 하나를 선택해서 입력하세요.:");
-        int user_num = s.nextInt();
+        int user_num = 0;
+        while (true) {
+            System.out.print("1(가위) /2(바위) /3(보) 중에서 숫자 하나를 선택해서 입력하세요.:");
+            user_num = s.nextInt();
+            if (user_num >= 1 && user_num <= 3) {
+            break;
+            } else {
+                System.out.println("잘못된 입력입니다. 1(가위) /2(바위) /3(보) 중에서 숫자 하나를 입력해야 합니다.");
+            }
+        }
         System.out.println("User가 입력한 값 :"+user_num);
         Random random = new Random();
         int cpu_num = random.nextInt(3) + 1; 
