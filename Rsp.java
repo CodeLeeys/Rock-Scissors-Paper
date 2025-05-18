@@ -1,5 +1,6 @@
 import java.util.Scanner;
 import java.util.Random;
+import java.util.InputMismatchException;
 public class Rsp{    
     public static void main(String[]args){
         boolean play = true;
@@ -8,11 +9,16 @@ public class Rsp{
             int user_num = 0;
             while (true) {
                 System.out.print("1(가위) /2(바위) /3(보) 중에서 숫자 하나를 선택해서 입력하세요.:");
-                user_num = s.nextInt();
-                if (user_num >= 1 && user_num <= 3) {
-                break;
-                } else {
-                    System.out.println("잘못된 입력입니다. 1(가위) /2(바위) /3(보) 중에서 숫자 하나를 입력해야 합니다.");
+                try {
+                    user_num = s.nextInt();
+                    if (user_num >= 1 && user_num <= 3) {
+                    break;
+                    } else {
+                        System.out.println("잘못된 입력입니다. 1(가위) /2(바위) /3(보) 중에서 숫자 하나를 입력해야 합니다.");
+                    }
+                } catch (InputMismatchException e) {
+                    System.out.println("숫자만 입력해주세요.");
+                    s.next();
                 }
             }
             String user_choice;
@@ -21,7 +27,7 @@ public class Rsp{
                 case 2: user_choice = "바위"; break;
                 default : user_choice = "보"; break;
             }
-            System.out.println("User가 입력한 값 :"+user_num + "->" + user_choice);
+            System.out.println("[User] 고른 숫자 :"+user_num + "->" + user_choice);
             Random random = new Random();
             int com_num = random.nextInt(1,4);
             String com_choice;
@@ -30,15 +36,15 @@ public class Rsp{
                 case 2: com_choice = "바위"; break;
                 default: com_choice = "보"; break;
             }
-            System.out.println("CPU가 고른 숫자: " + com_num + "->" + com_choice);
+            System.out.println("[Com] 고른 숫자: " + com_num + "->" + com_choice);
             if ((user_num == 1 && com_num == 3) || 
                 (user_num == 2 && com_num == 1) || 
                 (user_num == 3 && com_num == 2)) {
-                System.out.println("User 승리!");
+                System.out.println("[User] 승리!");
             } else if (user_num == com_num){
                 System.out.println("비김");
             } else {
-                System.out.println("COM 승리!");
+                System.out.println("[Com] 승리!");
             }
             while (true) {
                 System.out.print("게임을 계속 하시겠습니까? (y/n) : ");
